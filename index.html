@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
     <title>NOTICIAS WW2</title>
     <style>
-        /* ===== ESTILO MILITAR 1938 · TEMA OSCURO ===== */
         * {
             margin: 0;
             padding: 0;
@@ -25,7 +24,6 @@
             min-height: 100vh;
         }
 
-        /* encabezado: cuartel general */
         .cuartel {
             display: flex;
             flex-wrap: wrap;
@@ -64,7 +62,6 @@
             filter: drop-shadow(0 0 6px #6a7c5f);
         }
 
-        /* panel de filtros — años */
         .filtros-anio {
             display: flex;
             flex-wrap: wrap;
@@ -112,7 +109,6 @@
             box-shadow: 0 0 12px #ad9f4b;
         }
 
-        /* cuadrícula de noticias */
         .tablon {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -120,8 +116,7 @@
             margin-top: 25px;
         }
 
-        /* tarjeta de parte militar */
-        .tarjeta-noticia {
+           .tarjeta-noticia {
             background: #1c231c;
             background: linear-gradient(145deg, #1f281f 0%, #151a15 100%);
             border: 1px solid #4c5540;
@@ -178,7 +173,6 @@
             text-transform: uppercase;
         }
 
-        /* MODAL — informe ampliado */
         .modal-guerra {
             display: none;
             position: fixed;
@@ -271,7 +265,6 @@
             white-space: pre-line;
         }
 
-        /* pie de página */
         .pie-pagina {
             margin-top: 50px;
             padding: 20px 0;
@@ -282,7 +275,7 @@
             letter-spacing: 2px;
         }
 
-        /* mensaje sin noticias */
+
         .sin-noticias {
             grid-column: 1 / -1;
             text-align: center;
@@ -293,7 +286,6 @@
             color: #b9b48b;
         }
 
-        /* scroll personalizado */
         ::-webkit-scrollbar {
             width: 10px;
             background: #1b1f18;
@@ -307,7 +299,6 @@
 </head>
 <body>
 
-<!-- ========== ENCABEZADO: LOGO DEL ROL ========== -->
 <header class="cuartel">
     <div style="display: flex; align-items: center;">
         <span class="insignia">⚔️</span>
@@ -321,18 +312,15 @@
     </div>
 </header>
 
-<!-- ========== FILTRO POR AÑO ========== -->
 <div class="filtros-anio" id="panelFiltros">
     <span>🗓️ TITULARES:</span>
-    <!-- los botones se generan dinámicamente con JS -->
 </div>
 
-<!-- ========== TABLÓN DE NOTICIAS ========== -->
 <main id="tablonNoticias" class="tablon">
-    <!-- aquí se renderizan las tarjetas -->
+
 </main>
 
-<!-- ========== MODAL PARA NOTICIA EXTENDIDA ========== -->
+
 <div id="modalNoticia" class="modal-guerra">
     <div class="modal-contenido">
         <button id="cerrarModalBtn" class="btn-cerrar-modal">&times;</button>
@@ -343,30 +331,12 @@
     </div>
 </div>
 
-<!-- ========== PIE DE PÁGINA ========== -->
 <footer class="pie-pagina">
     <span>WW2 · NOTICIAS</span><br>
     <span style="font-size: 0.7rem;">✦ Cortesía de Deceiver ✦</span>
 </footer>
 
 <script>
-    // =========================================================================
-    // ██████╗  █████╗ ███████╗███████╗    ██████╗ ███████╗     ██████╗ ██╗   ██╗███████╗██████╗ ██████╗ 
-    // ██╔══██╗██╔══██╗██╔════╝██╔════╝    ██╔══██╗██╔════╝    ██╔════╝ ██║   ██║██╔════╝██╔══██╗██╔══██╗
-    // ██████╔╝███████║███████╗███████╗    ██████╔╝█████╗      ██║  ███╗██║   ██║█████╗  ██████╔╝██║  ██║
-    // ██╔══██╗██╔══██║╚════██║╚════██║    ██╔══██╗██╔══╝      ██║   ██║██║   ██║██╔══╝  ██╔══██╗██║  ██║
-    // ██████╔╝██║  ██║███████║███████║    ██║  ██║███████╗    ╚██████╔╝╚██████╔╝███████╗██║  ██║██████╔╝
-    // ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝    ╚═╝  ╚═╝╚══════╝     ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═════╝ 
-    // =========================================================================
-    // ★ INSTRUCCIONES PARA AÑADIR / ELIMINAR NOTICIAS ★
-    //   1. Localiza el array 'noticias' justo debajo.
-    //   2. Para AGREGAR: copia un objeto entre llaves { ... } y pégalo dentro del array, separado por comas.
-    //   3. Cada noticia necesita: titular, mesAno, contexto, imagen.
-    //   4. Para ELIMINAR: borra el objeto completo (desde la llave '{' hasta '}').
-    //   5. Los filtros por año y las tarjetas se actualizan automáticamente al recargar la página.
-    //   6. Campo 'imagen' puede ser URL externa o de placeholder (ej: placehold.co). 
-    //      Usa imágenes con licencia libre o de tus archivos.
-    // =========================================================================
 
     const noticias = [
         {
@@ -399,12 +369,14 @@
             contexto: "El gobierno nacionalista ha declarado el estado de emergencia tras una intensificación de ataques por parte de grupos guerrilleros en el norte y sur del país. Como respuesta, se ha ordenado la movilización de aproximadamente 100.000 milicianos para reforzar las líneas defensivas y estabilizar las regiones afectadas. Fuentes oficiales describen esta movilización como una de las mayores concentraciones de fuerzas armadas vistas en la historia reciente del país. El gobierno asegura que la medida es necesaria para preservar la integridad territorial y el orden interno. Sin embargo, analistas advierten que la magnitud de la movilización refleja la gravedad de la situación y la fragilidad del equilibrio político en China.",
             imagen: "https://i.pinimg.com/736x/4c/6a/e8/4c6ae8d6972d945c08f5911c386a6f0f.jpg"
         }
+        {
+            titular: "ULTIMA HORA: El ejército nacionalista chino queda cercado en ofensiva coordinada; China pierde acceso al mercado internacional",
+            mesAno: "1938",
+            contexto: "En un giro crítico de los acontecimientos, el ejército nacionalista chino ha quedado cercado tras una ofensiva simultánea lanzada desde tres frentes distintos. Informes militares confirman que las fuerzas gubernamentales se encuentran bajo intensa presión, con líneas de suministro interrumpidas y comunicaciones parcialmente comprometidas. La maniobra, descrita por analistas como una operación de cerco estratégicamente planificada, ha reducido considerablemente la capacidad de respuesta del alto mando nacionalista. Las tropas movilizadas recientemente, que constituían uno de los mayores contingentes reunidos por el gobierno, se enfrentan ahora a una situación de aislamiento operativo. Paralelamente, China ha quedado prácticamente excluida del mercado internacional. El bloqueo de rutas marítimas y la pérdida de control sobre corredores comerciales clave han interrumpido exportaciones e importaciones esenciales, afectando tanto el suministro de armamento como el abastecimiento industrial y civil. El impacto económico comienza a sentirse en los principales centros urbanos, mientras la incertidumbre se cierne sobre el futuro inmediato del gobierno nacionalista. La combinación de cerco militar y asfixia comercial sitúa al país en uno de los momentos más delicados de su historia contemporánea.",
+            imagen: "https://i.pinimg.com/736x/0a/8c/63/0a8c63339e8669837246c99cc1c6cee8.jpg"
+        }
     ];
 
-    // ===== NO MODIFIQUES NADA DE AQUÍ EN ADELANTE (A MENOS QUE SEPAS LO QUE HACES) =====
-    // ===== PERO PUEDES EDITAR LAS NOTICIAS ARRIBA =======================================
-
-    // Elementos del DOM
     const tablon = document.getElementById('tablonNoticias');
     const panelFiltros = document.getElementById('panelFiltros');
     const modal = document.getElementById('modalNoticia');
@@ -414,16 +386,14 @@
     const modalContexto = document.getElementById('modalContexto');
     const cerrarModal = document.getElementById('cerrarModalBtn');
 
-    // Estado actual del filtro
-    let filtroActivo = 'all'; // 'all' o año (string)
 
-    // ---- función para extraer año del campo mesAno ----
+    let filtroActivo = 'all';
+
     function extraerAnio(fechaStr) {
         const partes = fechaStr.trim().split(' ');
-        return partes[partes.length - 1]; // último elemento: el año
+        return partes[partes.length - 1];
     }
 
-    // ---- obtener años únicos de todas las noticias ----
     function obtenerAniosUnicos() {
         const anios = noticias.map(n => extraerAnio(n.mesAno));
         return ['all', ...new Set(anios)].sort((a, b) => {
@@ -433,7 +403,6 @@
         });
     }
 
-    // ---- generar botones de filtro por año ----
     function generarBotonesFiltro() {
         const anios = obtenerAniosUnicos();
         panelFiltros.innerHTML = '<span>🗓️ FRENTE:</span>';
@@ -451,7 +420,6 @@
             }
             boton.addEventListener('click', function(e) {
                 filtroActivo = anio;
-                // actualizar clase activa en botones
                 document.querySelectorAll('.btn-anio').forEach(btn => btn.classList.remove('activo'));
                 this.classList.add('activo');
                 renderizarNoticias();
@@ -460,7 +428,6 @@
         });
     }
 
-    // ---- renderizar tarjetas según filtro ----
     function renderizarNoticias() {
         let noticiasFiltradas;
         if (filtroActivo === 'all') {
@@ -469,7 +436,6 @@
             noticiasFiltradas = noticias.filter(n => extraerAnio(n.mesAno) === filtroActivo);
         }
 
-        // limpiar tablon
         tablon.innerHTML = '';
 
         if (noticiasFiltradas.length === 0) {
@@ -477,15 +443,12 @@
             return;
         }
 
-        // crear cada tarjeta
         noticiasFiltradas.forEach((noticia, index) => {
             const tarjeta = document.createElement('article');
             tarjeta.className = 'tarjeta-noticia';
             
-            // usar índice como id temporal (no afecta)
-            tarjeta.setAttribute('data-indice', noticias.indexOf(noticia)); // índice original
+            tarjeta.setAttribute('data-indice', noticias.indexOf(noticia));
 
-            // estructura interior
             tarjeta.innerHTML = `
                 <img class="imagen-noticia" src="${noticia.imagen}" alt="Imagen: ${noticia.titular}" loading="lazy">
                 <div class="contenido-tarjeta">
@@ -494,7 +457,6 @@
                 </div>
             `;
 
-            // evento click para abrir modal con la info extendida
             tarjeta.addEventListener('click', function() {
                 abrirModal(noticia);
             });
@@ -503,7 +465,6 @@
         });
     }
 
-    // ---- abrir modal con noticia ampliada ----
     function abrirModal(noticia) {
         modalImg.src = noticia.imagen;
         modalImg.alt = noticia.titular;
@@ -513,18 +474,15 @@
         modal.style.display = 'flex';
     }
 
-    // ---- cerrar modal ----
     function cerrarModalFunc() {
         modal.style.display = 'none';
     }
 
-    // ---- inicializar la página ----
     function inicializar() {
         generarBotonesFiltro();
         renderizarNoticias();
     }
 
-    // Event listeners para modal
     cerrarModal.addEventListener('click', cerrarModalFunc);
     window.addEventListener('click', function(e) {
         if (e.target === modal) {
@@ -532,24 +490,9 @@
         }
     });
 
-    // Prevenir scroll del body cuando el modal está abierto (opcional)
     modal.addEventListener('wheel', (e) => e.stopPropagation(), { passive: false });
 
-    // Lanzar todo
     inicializar();
 </script>
-
-<!-- 
-    INSTRUCCIONES RÁPIDAS:
-    -------------------------------------------------------------
-    Para AÑADIR una noticia: 
-        - Busca el array 'noticias' (línea ~86). 
-        - Copia el modelo entre llaves y agrégalo al final, antes del cierre ];
-        - Respeta las comas entre objetos.
-        - Escribe el titular, mes/año (ej: "Junio 1939"), contexto e imagen (URL).
-    Para ELIMINAR: borra el objeto completo.
-    Los cambios se ven al recargar la página (no requiere servidor).
-    -------------------------------------------------------------
--->
 </body>
 </html>
