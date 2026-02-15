@@ -1,307 +1,377 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOTICIAS WW2</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>NOTICIAS WW2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        body {
+            background-color: #0a0c0a;
+            background-image: 
+                linear-gradient(45deg, rgba(60, 70, 50, 0.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(60, 70, 50, 0.1) 25%, transparent 25%);
+            background-size: 30px 30px;
+            font-family: 'Courier New', 'Courier', monospace;
+            color: #e0e5d6;
+            line-height: 1.5;
+            padding: 0 20px 40px;
+            min-height: 100vh;
+        }
 
-body{
-    background-color:#0a0c0a;
-    background-image:
-        linear-gradient(45deg, rgba(60,70,50,0.1) 25%, transparent 25%),
-        linear-gradient(-45deg, rgba(60,70,50,0.1) 25%, transparent 25%);
-    background-size:30px 30px;
-    font-family:'Courier New','Courier',monospace;
-    color:#e0e5d6;
-    line-height:1.5;
-    padding:0 20px 40px;
-    min-height:100vh;
-    font-size:16px;
-}
+        .cuartel {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0 15px;
+            border-bottom: 3px solid #6a7c5f;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.7);
+        }
 
-/* ================= HEADER ================= */
+        .logo {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Impact', 'Arial Black', 'Helvetica Bold', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+        .logo-principal {
+            font-size: 2.1rem;
+            color: #c9b037;
+            text-shadow: 3px 3px 0 #3a4428, 1px 1px 10px #9e7f2a;
+            margin-bottom: -5px;
+        }
+        .logo-secundario {
+            font-size: 0.9rem;
+            color: #b8b99b;
+            letter-spacing: 8px;
+            border-top: 1px solid #7a8b6b;
+            padding-top: 5px;
+            margin-top: 5px;
+        }
+        .insignia {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            filter: drop-shadow(0 0 6px #6a7c5f);
+        }
 
-.cuartel{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    justify-content:space-between;
-    padding:20px 0 15px;
-    border-bottom:3px solid #6a7c5f;
-    margin-bottom:25px;
-    box-shadow:0 4px 8px rgba(0,0,0,0.7);
-}
+        .filtros-anio {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin: 25px 0 20px;
+            padding: 10px 5px;
+            background: rgba(20, 25, 18, 0.7);
+            border-left: 6px solid #8b7e4c;
+            border-radius: 0 12px 12px 0;
+            backdrop-filter: blur(2px);
+        }
+        .filtros-anio span {
+            font-weight: bold;
+            color: #dddaa8;
+            margin-right: 5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        .btn-anio {
+            background: #2a3124;
+            border: 1px solid #656b4a;
+            color: #d4d8c9;
+            padding: 8px 20px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.8), 0 2px 3px #0f0f0f;
+        }
+        .btn-anio:hover {
+            background: #4a553c;
+            border-color: #b6a351;
+            color: #fff8d6;
+            box-shadow: 0 0 8px #7f8e4a;
+        }
+        .btn-anio.activo {
+            background: #6f7c45;
+            border-color: #e9d87e;
+            color: #0c0c0c;
+            font-weight: 900;
+            box-shadow: 0 0 12px #ad9f4b;
+        }
 
-.logo{
-    display:flex;
-    flex-direction:column;
-    font-family:'Impact','Arial Black','Helvetica Bold',sans-serif;
-    text-transform:uppercase;
-    letter-spacing:4px;
-}
+        .tablon {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px 25px;
+            margin-top: 25px;
+        }
 
-.logo-principal{
-    font-size:clamp(1.2rem,2.5vw,2.1rem);
-    color:#c9b037;
-    text-shadow:3px 3px 0 #3a4428,1px 1px 10px #9e7f2a;
-    margin-bottom:-5px;
-}
+           .tarjeta-noticia {
+            background: #1c231c;
+            background: linear-gradient(145deg, #1f281f 0%, #151a15 100%);
+            border: 1px solid #4c5540;
+            border-radius: 8px 8px 8px 8px;
+            overflow: hidden;
+            box-shadow: 8px 8px 12px rgba(0,0,0,0.7), inset 0 0 0 1px #4f5d3f;
+            transition: transform 0.15s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+        }
+        .tarjeta-noticia:hover {
+            transform: translateY(-6px);
+            box-shadow: 10px 12px 16px black, inset 0 0 0 2px #8b7e4c;
+            border-color: #9e9149;
+        }
 
-.logo-secundario{
-    font-size:clamp(0.6rem,1.5vw,0.9rem);
-    color:#b8b99b;
-    letter-spacing:6px;
-    border-top:1px solid #7a8b6b;
-    padding-top:5px;
-    margin-top:5px;
-}
+        .imagen-noticia {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-bottom: 3px solid #515e41;
+            display: block;
+            background-color: #2d3327;
+        }
 
-.insignia{
-    font-size:2rem;
-    margin-right:15px;
-}
+        .contenido-tarjeta {
+            padding: 18px 16px 20px;
+        }
 
-/* ================= FILTROS ================= */
+        .titular-tarjeta {
+            font-size: 1.35rem;
+            font-weight: 700;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #f0eac1;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 0 #1f1f1f;
+            letter-spacing: 0.5px;
+        }
 
-.filtros-anio{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    align-items:center;
-    margin:25px 0 20px;
-    padding:10px;
-    background:rgba(20,25,18,0.7);
-    border-left:6px solid #8b7e4c;
-    border-radius:0 12px 12px 0;
-}
+        .fecha-tarjeta {
+            font-size: 0.9rem;
+            color: #c7bf84;
+            background: #252e1e;
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 30px;
+            border: 1px solid #6b7843;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
 
-.btn-anio{
-    background:#2a3124;
-    border:1px solid #656b4a;
-    color:#d4d8c9;
-    padding:6px 14px;
-    font-weight:bold;
-    font-size:0.8rem;
-    text-transform:uppercase;
-    border-radius:20px;
-    cursor:pointer;
-}
+        .modal-guerra {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(8, 10, 6, 0.95);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
 
-.btn-anio:hover{
-    background:#4a553c;
-    border-color:#b6a351;
-    color:#fff8d6;
-}
+        .modal-contenido {
+            background: #1d231b;
+            border: 4px double #978b4b;
+            border-radius: 12px;
+            max-width: 750px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px 28px;
+            box-shadow: 0 0 35px #1f1f1f, inset 0 0 0 2px #5d6542;
+            position: relative;
+            color: #e7e9d7;
+        }
 
-.btn-anio.activo{
-    background:#6f7c45;
-    border-color:#e9d87e;
-    color:#0c0c0c;
-    font-weight:900;
-}
+        .btn-cerrar-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #c9ad56;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            font-weight: bold;
+            text-shadow: 0 0 8px #2b2b1a;
+            line-height: 1;
+        }
+        .btn-cerrar-modal:hover {
+            color: #fff3b3;
+            transform: scale(1.2);
+        }
 
-/* ================= GRID ================= */
+        .modal-imagen {
+            width: 100%;
+            max-height: 280px;
+            object-fit: cover;
+            border: 3px solid #5f6b44;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
 
-.tablon{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-    margin-top:25px;
-}
+        .modal-titular {
+            font-size: 2rem;
+            font-family: 'Georgia', serif;
+            color: #ead97e;
+            border-left: 10px solid #7e8c55;
+            padding-left: 20px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
 
-/* ================= TARJETAS ================= */
+        .modal-fecha {
+            font-size: 1.1rem;
+            color: #bebf8b;
+            background: #2d3828;
+            display: inline-block;
+            padding: 5px 25px;
+            border-radius: 40px;
+            margin-bottom: 25px;
+            border: 1px solid #a0974a;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
 
-.tarjeta-noticia{
-    background:linear-gradient(145deg,#1f281f 0%,#151a15 100%);
-    border:1px solid #4c5540;
-    border-radius:8px;
-    overflow:hidden;
-    box-shadow:8px 8px 12px rgba(0,0,0,0.7);
-    transition:0.2s;
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-}
+        .modal-contexto {
+            font-size: 1.1rem;
+            line-height: 1.65;
+            background: rgba(10, 15, 8, 0.7);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 6px solid #837a3d;
+            margin-top: 15px;
+            color: #f2f2e2;
+            font-family: 'Courier New', monospace;
+            white-space: pre-line;
+        }
 
-.tarjeta-noticia:hover{
-    transform:translateY(-4px);
-    border-color:#9e9149;
-}
+        .pie-pagina {
+            margin-top: 50px;
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid #57624b;
+            color: #939b7c;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
 
-.imagen-noticia{
-    width:100%;
-    height:160px;
-    object-fit:cover;
-    border-bottom:3px solid #515e41;
-}
 
-.contenido-tarjeta{
-    padding:15px;
-}
+        .sin-noticias {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px;
+            background: #1d211a;
+            border: 1px dashed #7e874b;
+            font-size: 1.5rem;
+            color: #b9b48b;
+        }
 
-.titular-tarjeta{
-    font-size:clamp(0.95rem,2vw,1.25rem);
-    font-weight:700;
-    font-family:'Georgia',serif;
-    color:#f0eac1;
-    margin-bottom:8px;
-}
-
-.fecha-tarjeta{
-    font-size:0.75rem;
-    color:#c7bf84;
-    background:#252e1e;
-    padding:4px 10px;
-    border-radius:20px;
-    border:1px solid #6b7843;
-}
-
-/* ================= MODAL ================= */
-
-.modal-guerra{
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(8,10,6,0.95);
-    align-items:center;
-    justify-content:center;
-    z-index:1000;
-    padding:15px;
-}
-
-.modal-contenido{
-    background:#1d231b;
-    border:3px double #978b4b;
-    border-radius:12px;
-    max-width:700px;
-    width:100%;
-    max-height:90vh;
-    overflow-y:auto;
-    padding:20px;
-    position:relative;
-}
-
-.btn-cerrar-modal{
-    position:absolute;
-    top:10px;
-    right:15px;
-    font-size:1.5rem;
-    background:none;
-    border:none;
-    color:#c9ad56;
-    cursor:pointer;
-}
-
-.modal-imagen{
-    width:100%;
-    max-height:220px;
-    object-fit:cover;
-    margin-bottom:15px;
-}
-
-.modal-titular{
-    font-size:clamp(1.1rem,3vw,1.8rem);
-    color:#ead97e;
-    margin-bottom:10px;
-}
-
-.modal-fecha{
-    font-size:0.9rem;
-    display:inline-block;
-    padding:5px 15px;
-    margin-bottom:15px;
-    background:#2d3828;
-    border-radius:30px;
-}
-
-.modal-contexto{
-    font-size:0.95rem;
-    line-height:1.6;
-    background:rgba(10,15,8,0.7);
-    padding:15px;
-    border-radius:8px;
-    white-space:pre-line;
-}
-
-/* ================= FOOTER ================= */
-
-.pie-pagina{
-    margin-top:50px;
-    padding:20px 0;
-    text-align:center;
-    border-top:1px solid #57624b;
-    font-size:0.75rem;
-}
-
-/* ================= RESPONSIVE EXTRA ================= */
-
-@media (max-width:768px){
-    body{
-        padding:0 12px 30px;
-        font-size:14px;
-    }
-    .cuartel{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:10px;
-    }
-    .tablon{
-        grid-template-columns:1fr;
-    }
-}
-
-</style>
+        ::-webkit-scrollbar {
+            width: 10px;
+            background: #1b1f18;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5f6944;
+            border-radius: 10px;
+            border: 1px solid #1e1e1e;
+        }
+    </style>
 </head>
-
 <body>
 
 <header class="cuartel">
-<div style="display:flex;align-items:center;">
-<span class="insignia">⚔️</span>
-<div class="logo">
-<div class="logo-principal">WW2</div>
-<div class="logo-secundario">NOTICIAS ACTUALES</div>
-</div>
-</div>
-<div style="font-size:0.8rem;color:#b7b192;border:1px solid #5a6341;padding:6px 12px;background:#1f271f;">
-<span style="font-weight:bold;">DECEIVER´S</span>
-</div>
+    <div style="display: flex; align-items: center;">
+        <span class="insignia">⚔️</span>
+        <div class="logo">
+            <div class="logo-principal">WWW2</div>
+            <div class="logo-secundario">NOTICIAS ACTUALES</div>
+        </div>
+    </div>
+    <div style="font-size: 0.9rem; color: #b7b192; border: 1px solid #5a6341; padding: 8px 16px; background: #1f271f;">
+        <span style="font-weight: bold;">DECEIVER´S</span>
+    </div>
 </header>
 
 <div class="filtros-anio" id="panelFiltros">
-<span>🗓️ TITULARES:</span>
+    <span>🗓️ TITULARES:</span>
 </div>
 
-<main id="tablonNoticias" class="tablon"></main>
+<main id="tablonNoticias" class="tablon">
+
+</main>
+
 
 <div id="modalNoticia" class="modal-guerra">
-<div class="modal-contenido">
-<button id="cerrarModalBtn" class="btn-cerrar-modal">&times;</button>
-<img id="modalImg" class="modal-imagen">
-<h2 id="modalTitular" class="modal-titular"></h2>
-<span id="modalFecha" class="modal-fecha"></span>
-<div id="modalContexto" class="modal-contexto"></div>
-</div>
+    <div class="modal-contenido">
+        <button id="cerrarModalBtn" class="btn-cerrar-modal">&times;</button>
+        <img id="modalImg" class="modal-imagen" src="" alt="imagen frente">
+        <h2 id="modalTitular" class="modal-titular"></h2>
+        <span id="modalFecha" class="modal-fecha"></span>
+        <div id="modalContexto" class="modal-contexto"></div>
+    </div>
 </div>
 
 <footer class="pie-pagina">
-WW2 · NOTICIAS<br>
-✦ Cortesía de Deceiver ✦
+    <span>WW2 · NOTICIAS</span><br>
+    <span style="font-size: 0.7rem;">✦ Cortesía de Deceiver ✦</span>
 </footer>
 
 <script>
-const noticias = [
-    {
+
+    const noticias = [
+        {
+  titular: "Ribbentrop advierte represalias tras captura de flota; el Führer anuncia inminente acción contra fuerzas republicanas",
+  mesAno: "1939",
+  contexto: "Tras confirmarse la interceptación de la flota alemana, el Ministro de Exteriores Joachim von Ribbentrop declaró que el Reich tomará medidas inmediatas contra las fuerzas republicanas responsables del hundimiento y captura de embarcaciones comerciales. Según fuentes oficiales, durante la reunión matutina el Führer fue contundente: 'Los chinos republicanos han cavado su tumba'. Berlín recordó además a Francia, India y Japón sus pactos de no agresión, advirtiendo que cualquier ataque contra fuerzas alemanas que se desplieguen en Asia tendrá consecuencias directas.",
+  imagen: "https://i.pinimg.com/736x/89/28/b9/8928b930334bc374469c2312ed752edc.jpg"
+},
+{
+  titular: "Flota comercial alemana interceptada por fuerzas navales republicanas; capturado cargamento de armamento",
+  mesAno: "1939",
+  contexto: "En una acción que eleva drásticamente la tensión internacional, unidades navales de la denominada república popular interceptaron y capturaron varios buques comerciales alemanes en ruta hacia puertos bajo control nacionalista. Informes preliminares señalan la incautación de importantes cantidades de armamento y suministros militares. Berlín calificó el acto como 'piratería de Estado' y una agresión directa contra su comercio exterior. El incidente podría precipitar la intervención militar alemana en el conflicto asiático, transformando la guerra civil china en un enfrentamiento de carácter internacional.",
+  imagen: "https://i.pinimg.com/736x/11/4c/00/114c00cf1fb880290a67bf8f1e763b0b.jpg"
+},
+
+{
+  titular: "Reich Alemán condena intervención de Francia e India y anuncia medidas en defensa de China Nacionalista",
+  mesAno: "1939",
+  contexto: "Berlín — El Gobierno del Reich Alemán, a través de su Ministro de Relaciones Exteriores, Joachim von Ribbentrop, expresó su más enérgica condena contra lo que calificó como 'intervención injustificada y hostil' de Francia e India en la guerra civil china. Alemania reafirmó su respaldo firme al gobierno del Kuomintang y advirtió que adoptará medidas inmediatas para defender la integridad de China Nacionalista. En el comunicado oficial también se instó a las potencias que mantienen un cerco naval a abstenerse de interferir con la flota comercial alemana que se dirige a aguas chinas, señalando que cualquier agresión será considerada un ataque directo a los intereses económicos del Reich.",
+  imagen: "https://i.pinimg.com/736x/ca/bd/c6/cabdc6ff546d01e9e01cb53fc4ba0c2d.jpg"
+},
+{
+  titular: "Crisis política en Reino Unido: ejecución del matrimonio real y ascenso de primera ministra liberal feminista",
+  mesAno: "1939",
+  contexto: "Londres — En un giro sin precedentes, el matrimonio real ha sido ejecutado en circunstancias que aún generan controversia y conmoción nacional. Sectores radicales proclamaron el hecho como un acto revolucionario, mientras amplios sectores sociales reaccionan con incertidumbre y tensión. Paralelamente, una líder liberal de orientación feminista ha asumido el cargo de primera ministra, convirtiéndose en la primera mujer en dirigir el gobierno británico. Su ascenso marca un cambio político significativo en el Reino Unido en medio de una coyuntura internacional cada vez más volátil.",
+  imagen: "https://i.pinimg.com/736x/91/7b/6f/917b6f4557e4b19c60588cca067011a4.jpg"
+},
+
+        {
+  titular: "ULTIMA HORA: Francia cruza la frontera de China Nacionalista tras respaldo oficial a sus reclamaciones sobre Indochina",
+  mesAno: "1939",
+  contexto: "En un movimiento que redefine el equilibrio en Asia, fuerzas del ejército francés han penetrado la frontera de China Nacionalista en lo que París describe como una 'operación preventiva de estabilización'. La acción se produce después de que el gobierno chino nacionalista reiterara públicamente sus aspiraciones de tomar control sobre la Indochina francesa. Autoridades francesas argumentan que la incursión busca neutralizar amenazas estratégicas y proteger sus intereses coloniales. La entrada formal de Francia en el teatro asiático amplía considerablemente el conflicto regional, generando reacciones inmediatas de Berlín y otras capitales europeas.",
+  imagen: "https://i.pinimg.com/736x/b3/cf/43/b3cf43afbdeb9227f0fc3167ad22e4b1.jpg"
+},
+        {
             titular: "ULTIMA HORA: India declara la guerra a China nacionalista tras comunicado expansionista dirigido contra Japón y Francia",
             mesAno: "1938",
             contexto: "El gobierno de la India ha declarado formalmente el estado de guerra contra China nacionalista después de que esta última difundiera un comunicado oficial en el que manifestaba sus intenciones de expandir su territorio mediante la ocupación de zonas bajo soberanía japonesa y francesa. La declaración china, que fue interpretada por varias potencias como una amenaza directa al equilibrio regional, encendió las alarmas diplomáticas en Asia y Europa. En respuesta, el ejecutivo indio calificó dichas aspiraciones como “una alteración inadmisible del orden internacional” y anunció la movilización inmediata de fuerzas terrestres y navales. Altos mandos militares indios confirmaron que se han reforzado posiciones estratégicas y que se preparan operaciones preventivas destinadas a contener cualquier avance chino que pueda comprometer la estabilidad del subcontinente. La comunidad internacional observa con creciente inquietud esta nueva escalada. La guerra entre India y China nacionalista introduce un frente adicional en un escenario ya marcado por tensiones globales, alianzas inestables y ambiciones territoriales que amenazan con transformar conflictos regionales en enfrentamientos de mayor alcance.",
@@ -343,69 +413,125 @@ const noticias = [
             contexto: "El gobierno nacionalista ha declarado el estado de emergencia tras una intensificación de ataques por parte de grupos guerrilleros en el norte y sur del país. Como respuesta, se ha ordenado la movilización de aproximadamente 100.000 milicianos para reforzar las líneas defensivas y estabilizar las regiones afectadas. Fuentes oficiales describen esta movilización como una de las mayores concentraciones de fuerzas armadas vistas en la historia reciente del país. El gobierno asegura que la medida es necesaria para preservar la integridad territorial y el orden interno. Sin embargo, analistas advierten que la magnitud de la movilización refleja la gravedad de la situación y la fragilidad del equilibrio político en China.",
             imagen: "https://i.pinimg.com/736x/4c/6a/e8/4c6ae8d6972d945c08f5911c386a6f0f.jpg"
         }
-];
+        
+    ];
 
-const tablon=document.getElementById('tablonNoticias');
-const panelFiltros=document.getElementById('panelFiltros');
-const modal=document.getElementById('modalNoticia');
-const modalImg=document.getElementById('modalImg');
-const modalTitular=document.getElementById('modalTitular');
-const modalFecha=document.getElementById('modalFecha');
-const modalContexto=document.getElementById('modalContexto');
-const cerrarModal=document.getElementById('cerrarModalBtn');
+    const tablon = document.getElementById('tablonNoticias');
+    const panelFiltros = document.getElementById('panelFiltros');
+    const modal = document.getElementById('modalNoticia');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitular = document.getElementById('modalTitular');
+    const modalFecha = document.getElementById('modalFecha');
+    const modalContexto = document.getElementById('modalContexto');
+    const cerrarModal = document.getElementById('cerrarModalBtn');
 
-let filtroActivo='all';
 
-function extraerAnio(f){return f.trim().split(' ').pop();}
-function obtenerAniosUnicos(){
-const anios=noticias.map(n=>extraerAnio(n.mesAno));
-return ['all',...new Set(anios)];
-}
+    let filtroActivo = 'all';
 
-function generarBotonesFiltro(){
-const anios=obtenerAniosUnicos();
-panelFiltros.innerHTML='<span>🗓️ FRENTE:</span>';
-anios.forEach(anio=>{
-const b=document.createElement('button');
-b.className='btn-anio';
-b.textContent=anio==='all'?'TODOS':anio;
-if(filtroActivo===anio)b.classList.add('activo');
-b.onclick=()=>{filtroActivo=anio;generarBotonesFiltro();renderizarNoticias();};
-panelFiltros.appendChild(b);
-});
-}
+    function extraerAnio(fechaStr) {
+        const partes = fechaStr.trim().split(' ');
+        return partes[partes.length - 1];
+    }
 
-function renderizarNoticias(){
-tablon.innerHTML='';
-const filtradas=filtroActivo==='all'?noticias:noticias.filter(n=>extraerAnio(n.mesAno)===filtroActivo);
-filtradas.forEach(n=>{
-const t=document.createElement('article');
-t.className='tarjeta-noticia';
-t.innerHTML=`
-<img class="imagen-noticia" src="${n.imagen}">
-<div class="contenido-tarjeta">
-<h2 class="titular-tarjeta">${n.titular}</h2>
-<span class="fecha-tarjeta">${n.mesAno}</span>
-</div>`;
-t.onclick=()=>abrirModal(n);
-tablon.appendChild(t);
-});
-}
+    function obtenerAniosUnicos() {
+        const anios = noticias.map(n => extraerAnio(n.mesAno));
+        return ['all', ...new Set(anios)].sort((a, b) => {
+            if (a === 'all') return -1;
+            if (b === 'all') return 1;
+            return a.localeCompare(b);
+        });
+    }
 
-function abrirModal(n){
-modalImg.src=n.imagen;
-modalTitular.textContent=n.titular;
-modalFecha.textContent=n.mesAno;
-modalContexto.textContent=n.contexto;
-modal.style.display='flex';
-}
+    function generarBotonesFiltro() {
+        const anios = obtenerAniosUnicos();
+        panelFiltros.innerHTML = '<span>🗓️ FRENTE:</span>';
+        
+        anios.forEach(anio => {
+            const boton = document.createElement('button');
+            boton.className = 'btn-anio';
+            if (anio === 'all') {
+                boton.textContent = 'TODOS';
+            } else {
+                boton.textContent = anio;
+            }
+            if (filtroActivo === anio) {
+                boton.classList.add('activo');
+            }
+            boton.addEventListener('click', function(e) {
+                filtroActivo = anio;
+                document.querySelectorAll('.btn-anio').forEach(btn => btn.classList.remove('activo'));
+                this.classList.add('activo');
+                renderizarNoticias();
+            });
+            panelFiltros.appendChild(boton);
+        });
+    }
 
-cerrarModal.onclick=()=>modal.style.display='none';
-window.onclick=e=>{if(e.target===modal)modal.style.display='none';};
+    function renderizarNoticias() {
+        let noticiasFiltradas;
+        if (filtroActivo === 'all') {
+            noticiasFiltradas = noticias;
+        } else {
+            noticiasFiltradas = noticias.filter(n => extraerAnio(n.mesAno) === filtroActivo);
+        }
 
-generarBotonesFiltro();
-renderizarNoticias();
+        tablon.innerHTML = '';
+
+        if (noticiasFiltradas.length === 0) {
+            tablon.innerHTML = '<div class="sin-noticias">⛔ NO HAY PARTES DE GUERRA PARA ESTE AÑO</div>';
+            return;
+        }
+
+        noticiasFiltradas.forEach((noticia, index) => {
+            const tarjeta = document.createElement('article');
+            tarjeta.className = 'tarjeta-noticia';
+            
+            tarjeta.setAttribute('data-indice', noticias.indexOf(noticia));
+
+            tarjeta.innerHTML = `
+                <img class="imagen-noticia" src="${noticia.imagen}" alt="Imagen: ${noticia.titular}" loading="lazy">
+                <div class="contenido-tarjeta">
+                    <h2 class="titular-tarjeta">${noticia.titular}</h2>
+                    <span class="fecha-tarjeta">${noticia.mesAno}</span>
+                </div>
+            `;
+
+            tarjeta.addEventListener('click', function() {
+                abrirModal(noticia);
+            });
+
+            tablon.appendChild(tarjeta);
+        });
+    }
+
+    function abrirModal(noticia) {
+        modalImg.src = noticia.imagen;
+        modalImg.alt = noticia.titular;
+        modalTitular.textContent = noticia.titular;
+        modalFecha.textContent = noticia.mesAno;
+        modalContexto.textContent = noticia.contexto;
+        modal.style.display = 'flex';
+    }
+
+    function cerrarModalFunc() {
+        modal.style.display = 'none';
+    }
+
+    function inicializar() {
+        generarBotonesFiltro();
+        renderizarNoticias();
+    }
+
+    cerrarModal.addEventListener('click', cerrarModalFunc);
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            cerrarModalFunc();
+        }
+    });
+
+    modal.addEventListener('wheel', (e) => e.stopPropagation(), { passive: false });
+
+    inicializar();
 </script>
-
 </body>
 </html>
