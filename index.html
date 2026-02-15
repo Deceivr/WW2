@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
     <title>NOTICIAS WW2</title>
     <style>
+        /* ===== RESET Y ESTILOS GENERALES ===== */
         * {
             margin: 0;
             padding: 0;
@@ -24,62 +25,88 @@
             min-height: 100vh;
         }
 
+        /* ===== ENCABEZADO CON LOGO ===== */
         .cuartel {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 0 15px;
+            padding: 15px 0 15px;
             border-bottom: 3px solid #6a7c5f;
             margin-bottom: 25px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.7);
         }
 
-        .logo {
+        /* Contenedor del logo */
+        .logo-container {
             display: flex;
-            flex-direction: column;
-            font-family: 'Impact', 'Arial Black', 'Helvetica Bold', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-        }
-        .logo-principal {
-            font-size: 2.1rem;
-            color: #c9b037;
-            text-shadow: 3px 3px 0 #3a4428, 1px 1px 10px #9e7f2a;
-            margin-bottom: -5px;
-        }
-        .logo-secundario {
-            font-size: 0.9rem;
-            color: #b8b99b;
-            letter-spacing: 8px;
-            border-top: 1px solid #7a8b6b;
-            padding-top: 5px;
-            margin-top: 5px;
-        }
-        .insignia {
-            font-size: 2.5rem;
-            margin-right: 15px;
-            filter: drop-shadow(0 0 6px #6a7c5f);
+            align-items: center;
+            gap: 15px;
         }
 
+        /* Imagen del logo (miniatura, sin fondo) */
+        .logo-img {
+            height: 60px;          /* Ajusta este tamaño según tu preferencia */
+            width: auto;
+            filter: drop-shadow(0 0 5px #9e7f2a);
+            transition: transform 0.2s;
+        }
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Texto al lado del logo (opcional, puedes quitarlo si prefieres solo imagen) */
+        .logo-texto {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .logo-texto .linea1 {
+            font-size: 1.8rem;
+            color: #c9b037;
+            text-shadow: 3px 3px 0 #3a4428;
+            line-height: 1.2;
+        }
+        .logo-texto .linea2 {
+            font-size: 0.8rem;
+            color: #b8b99b;
+            letter-spacing: 4px;
+            border-top: 1px solid #7a8b6b;
+            padding-top: 3px;
+        }
+
+        /* Etiqueta derecha (DECEIVER´S) */
+        .insignia-derecha {
+            font-size: 0.9rem;
+            color: #b7b192;
+            border: 1px solid #5a6341;
+            padding: 8px 16px;
+            background: #1f271f;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        /* ===== FILTROS ===== */
         .filtros-anio {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
             align-items: center;
             margin: 25px 0 20px;
-            padding: 10px 5px;
-            background: rgba(20, 25, 18, 0.7);
-            border-left: 6px solid #8b7e4c;
+            padding: 12px 15px;
+            background: rgba(20, 25, 18, 0.85);
+            border-left: 6px solid #b6a351;
             border-radius: 0 12px 12px 0;
             backdrop-filter: blur(2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
         .filtros-anio span {
             font-weight: bold;
             color: #dddaa8;
             margin-right: 5px;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
         }
         .btn-anio {
             background: #2a3124;
@@ -97,9 +124,9 @@
         }
         .btn-anio:hover {
             background: #4a553c;
-            border-color: #b6a351;
+            border-color: #e9d87e;
             color: #fff8d6;
-            box-shadow: 0 0 8px #7f8e4a;
+            box-shadow: 0 0 8px #e9d87e;
         }
         .btn-anio.activo {
             background: #6f7c45;
@@ -109,21 +136,22 @@
             box-shadow: 0 0 12px #ad9f4b;
         }
 
+        /* ===== TABLÓN DE NOTICIAS ===== */
         .tablon {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px 25px;
             margin-top: 25px;
         }
 
-           .tarjeta-noticia {
+        .tarjeta-noticia {
             background: #1c231c;
             background: linear-gradient(145deg, #1f281f 0%, #151a15 100%);
             border: 1px solid #4c5540;
-            border-radius: 8px 8px 8px 8px;
+            border-radius: 10px;
             overflow: hidden;
             box-shadow: 8px 8px 12px rgba(0,0,0,0.7), inset 0 0 0 1px #4f5d3f;
-            transition: transform 0.15s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
             display: flex;
             flex-direction: column;
             cursor: pointer;
@@ -131,17 +159,21 @@
         }
         .tarjeta-noticia:hover {
             transform: translateY(-6px);
-            box-shadow: 10px 12px 16px black, inset 0 0 0 2px #8b7e4c;
-            border-color: #9e9149;
+            box-shadow: 12px 14px 18px black, inset 0 0 0 2px #b6a351;
+            border-color: #b6a351;
         }
 
         .imagen-noticia {
             width: 100%;
-            height: 170px;
+            height: 180px;
             object-fit: cover;
             border-bottom: 3px solid #515e41;
             display: block;
             background-color: #2d3327;
+            transition: filter 0.2s;
+        }
+        .tarjeta-noticia:hover .imagen-noticia {
+            filter: brightness(1.1) contrast(1.1);
         }
 
         .contenido-tarjeta {
@@ -149,7 +181,7 @@
         }
 
         .titular-tarjeta {
-            font-size: 1.35rem;
+            font-size: 1.4rem;
             font-weight: 700;
             font-family: 'Georgia', 'Times New Roman', serif;
             color: #f0eac1;
@@ -164,15 +196,16 @@
             color: #c7bf84;
             background: #252e1e;
             display: inline-block;
-            padding: 4px 14px;
+            padding: 5px 16px;
             border-radius: 30px;
             border: 1px solid #6b7843;
             font-weight: 600;
             letter-spacing: 1.5px;
-            margin-top: 5px;
+            margin-top: 8px;
             text-transform: uppercase;
         }
 
+        /* ===== MODAL ===== */
         .modal-guerra {
             display: none;
             position: fixed;
@@ -265,6 +298,7 @@
             white-space: pre-line;
         }
 
+        /* ===== PIE DE PÁGINA ===== */
         .pie-pagina {
             margin-top: 50px;
             padding: 20px 0;
@@ -275,7 +309,6 @@
             letter-spacing: 2px;
         }
 
-
         .sin-noticias {
             grid-column: 1 / -1;
             text-align: center;
@@ -284,8 +317,10 @@
             border: 1px dashed #7e874b;
             font-size: 1.5rem;
             color: #b9b48b;
+            border-radius: 8px;
         }
 
+        /* ===== SCROLL PERSONALIZADO ===== */
         ::-webkit-scrollbar {
             width: 10px;
             background: #1b1f18;
@@ -299,32 +334,37 @@
 </head>
 <body>
 
+<!-- ========== ENCABEZADO CON LOGO (IMAGEN LOCAL) ========== -->
 <header class="cuartel">
-    <div style="display: flex; align-items: center;">
-        <span class="insignia">⚔️</span>
-        <div class="logo">
-            <div class="logo-principal">WWW2</div>
-            <div class="logo-secundario">NOTICIAS ACTUALES</div>
+    <div class="logo-container">
+
+        <img class="logo-img" src="Logo WW2.png" alt="Logo del Rol">
+        <div class="logo-texto">
+            <div class="linea1">WW2</div>
+            <div class="linea2">NOTICIAS</div>
         </div>
     </div>
-    <div style="font-size: 0.9rem; color: #b7b192; border: 1px solid #5a6341; padding: 8px 16px; background: #1f271f;">
-        <span style="font-weight: bold;">DECEIVER´S</span>
+    <div class="insignia-derecha">
+        <span>DECEIVER´S</span>
     </div>
 </header>
 
+<!-- ========== FILTRO POR AÑO ========== -->
 <div class="filtros-anio" id="panelFiltros">
     <span>🗓️ TITULARES:</span>
+    <!-- Los botones se generan dinámicamente con JS -->
 </div>
 
+<!-- ========== TABLÓN DE NOTICIAS ========== -->
 <main id="tablonNoticias" class="tablon">
-
+    <!-- Las tarjetas se renderizan aquí -->
 </main>
 
-
+<!-- ========== MODAL PARA NOTICIA EXTENDIDA ========== -->
 <div id="modalNoticia" class="modal-guerra">
     <div class="modal-contenido">
         <button id="cerrarModalBtn" class="btn-cerrar-modal">&times;</button>
-        <img id="modalImg" class="modal-imagen" src="" alt="imagen frente">
+        <img id="modalImg" class="modal-imagen" src="" alt="Imagen de la noticia">
         <h2 id="modalTitular" class="modal-titular"></h2>
         <span id="modalFecha" class="modal-fecha"></span>
         <div id="modalContexto" class="modal-contexto"></div>
@@ -339,6 +379,12 @@
 <script>
 
     const noticias = [
+        {
+  titular: "ULTIMA HORA: Sudáfrica declara su independencia tras levantamiento nacionalista",
+  mesAno: "1940",
+  contexto: "La situación en el sur del continente africano ha dado un giro trascendental. Tras la orden emitida desde Londres solicitando a las colonias la movilización obligatoria de jóvenes de 17 años para reforzar el esfuerzo militar imperial, en Sudáfrica ha estallado una ola de protestas que desembocó en la proclamación formal de independencia. El recién formado Frente Nacional de Liberación de Sudáfrica anunció públicamente la ruptura con la Corona británica, afirmando que la medida responde al “agotamiento político, económico y social” provocado por años de subordinación colonial y, más recientemente, por la imposición de reclutamientos considerados excesivos e injustificados.",
+  imagen: "https://i.pinimg.com/736x/b2/d8/6a/b2d86a1602df7eeb659aedd587638d20.jpg"
+},
         {
   titular: "Ribbentrop advierte represalias tras captura de flota; el Führer anuncia inminente acción contra fuerzas republicanas",
   mesAno: "1939",
